@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annaldas Rahul — Software & Data/ML Systems Engineer | B.Tech CSE</title>
+  <!-- Tailwind CSS CDN & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #ffffff; overflow-x: hidden; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Subtle Ambient Lighting Follower */
+    #ambient-glow {
+      position: fixed; top: 0; left: 0; width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(168, 85, 247, 0.04) 40%, transparent 70%);
+      transform: translate(-50%, -50%); pointer-events: none; z-index: 10;
+    }
+
+    /* Infinite Marquee */
+    @keyframes marqueeLeft { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+    @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+    .marquee-left { display: flex; width: max-content; animation: marqueeLeft 34s linear infinite; }
+    .marquee-right { display: flex; width: max-content; animation: marqueeRight 34s linear infinite; }
+    .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
+
+    /* Glass Panels & Subtle Hover */
+    .glass-panel {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-panel:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Terminal Window Styling */
+    .terminal-box {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(56, 189, 248, 0.12);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+  </style>
+</head>
+<body class="selection:bg-fuchsia-500 selection:text-white relative">
+
+  <div id="ambient-glow"></div>
+
+  <!-- NAVIGATION -->
+  <header class="w-full px-6 sm:px-10 py-4 flex items-center justify-between border-b border-white/[0.06] bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+      <a href="#" class="text-lg font-black tracking-tight text-white font-mono">
+        ANNALDAS<span class="text-sky-400">.</span>RAHUL
+      </a>
+      <span class="hidden lg:inline-block px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-[10px] font-mono text-zinc-400">
+        ST. MARTIN'S &bull; B.TECH CSE '27
+      </span>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+      <a href="#projects" class="hover:text-white transition">// Projects</a>
+      <a href="#coding" class="hover:text-amber-400 transition">// LeetCode & Coding</a>
+      <a href="#experience" class="hover:text-emerald-400 transition">// Experience</a>
+      <a href="#contact" class="hover:text-fuchsia-400 transition">// Get In Touch</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="https://github.com/rahulannaldas0406" target="_blank" class="p-2 text-zinc-400 hover:text-white transition" title="GitHub">
+        <i data-lucide="github" class="w-5 h-5"></i>
+      </a>
+      <a href="https://linkedin.com/in/annaldas-rahul" target="_blank" class="p-2 text-zinc-400 hover:text-white transition" title="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5"></i>
+      </a>
+      <a href="https://leetcode.com/u/rahul_annaldas1/" target="_blank" class="p-2 text-amber-400 hover:text-amber-300 transition" title="LeetCode (250+ Solved)">
+        <i data-lucide="code-2" class="w-5 h-5"></i>
+      </a>
+      <a href="#contact" class="px-4 py-2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+        Let's Connect
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (CLEAN & PROFESSIONAL DEVELOPER HERO) -->
+  <section class="relative min-h-[85vh] flex items-center px-6 sm:px-12 py-16 border-b border-white/[0.06] overflow-hidden">
+    <div class="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-sky-500/5 blur-[120px] pointer-events-none rounded-full"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-[350px] h-[350px] bg-indigo-500/5 blur-[100px] pointer-events-none rounded-full"></div>
+
+    <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Content -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Open to Software & Data/ML Engineering Roles &bull; 2027 Batch</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
+          Building Scalable Systems, <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-fuchsia-400">
+            Intelligent ML Pipelines
+          </span> <br>
+          & Testing Engines.
+        </h1>
+
+        <p class="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-xl">
+          I'm <strong class="text-white">Annaldas Rahul</strong>, a Computer Science student at <span class="text-zinc-200">St. Martin's Engineering College, Hyderabad</span>. Skilled in Python, Flask, SQL, and C++ with strong Data Structures & Algorithms problem-solving (<strong class="text-amber-400 font-mono">250+ LeetCode problems solved</strong>). Currently engineering my final-year major project on <strong class="text-sky-400">Software Testing</strong>.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#projects" class="px-7 py-3.5 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-zinc-200 transition shadow-[0_0_20px_rgba(255,255,255,0.15)] flex items-center gap-2">
+            View Projects <i data-lucide="arrow-down" class="w-4 h-4"></i>
+          </a>
+          <a href="#contact" class="px-7 py-3.5 rounded-full bg-white/[0.05] border border-white/15 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/10 transition">
+            Contact Me
+          </a>
+        </div>
+
+        <!-- Metrics Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 max-w-2xl">
+          <div class="p-3.5 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
+            <div class="text-2xl font-black font-mono text-amber-400">250+</div>
+            <div class="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">LeetCode Solved</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
+            <div class="text-2xl font-black font-mono text-sky-400">100k+</div>
+            <div class="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Candidates Scored</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
+            <div class="text-2xl font-black font-mono text-fuchsia-400">TELIPORT</div>
+            <div class="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Tata Elxsi Finalist</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-zinc-900/60 border border-white/[0.06]">
+            <div class="text-2xl font-black font-mono text-emerald-400">ACE</div>
+            <div class="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">Aviatrix Cloud</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Fast-Loading Developer Terminal Snapshot -->
+      <div class="lg:col-span-5">
+        <div class="terminal-box rounded-2xl overflow-hidden font-mono text-xs">
+          <div class="bg-zinc-900/90 px-4 py-3 border-b border-white/[0.08] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+              <span class="ml-2 text-zinc-400 font-medium">rahul@sys-kernel: ~/portfolio</span>
+            </div>
+            <span class="text-[10px] text-zinc-500 uppercase">zsh &bull; v2.7</span>
+          </div>
+
+          <div class="p-5 space-y-3.5 text-zinc-300">
+            <div>
+              <span class="text-sky-400">rahul@kernel:~$</span> whoami
+              <p class="text-zinc-200 mt-1 pl-3 border-l-2 border-sky-400/50">
+                Annaldas Rahul &bull; Software & Data/ML Systems Engineer<br>
+                Hyderabad, Telangana, India
+              </p>
+            </div>
+
+            <div>
+              <span class="text-sky-400">rahul@kernel:~$</span> cat active_work.json
+              <pre class="bg-black/60 p-3 rounded-lg border border-white/[0.05] text-[11px] text-zinc-300 mt-1 font-mono leading-relaxed">{
+  <span class="text-fuchsia-400">"degree"</span>: <span class="text-emerald-300">"B.Tech CSE (2023 - 2027)"</span>,
+  <span class="text-fuchsia-400">"college"</span>: <span class="text-emerald-300">"St. Martin's Engineering College"</span>,
+  <span class="text-fuchsia-400">"major_project"</span>: <span class="text-sky-300">"Software Testing Engine"</span>,
+  <span class="text-fuchsia-400">"leetcode_solved"</span>: <span class="text-amber-300">"250+ Problems"</span>,
+  <span class="text-fuchsia-400">"core_stack"</span>: [<span class="text-zinc-300">"Python"</span>, <span class="text-zinc-300">"Flask"</span>, <span class="text-zinc-300">"SQL"</span>, <span class="text-zinc-300">"C++"</span>, <span class="text-zinc-300">"DSA"</span>]
+}</pre>
+            </div>
+
+            <div>
+              <span class="text-sky-400">rahul@kernel:~$</span> query-status --available
+              <p class="text-emerald-400 font-bold mt-1">
+                &check; Ready for SDE / Data Engineering Opportunities
+              </p>
+            </div>
+
+            <div class="pt-1 text-zinc-500">
+              <span class="text-sky-400">rahul@kernel:~$</span> <span class="inline-block w-2 h-4 bg-sky-400 align-middle animate-pulse"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: FEATURED PROJECTS -->
+  <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+      <div>
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-sky-400">Engineered Solutions</span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mt-1">Featured Projects</h2>
+      </div>
+      <p class="text-xs text-zinc-400 mt-2 sm:mt-0 font-mono">Major Project, Hackathon & Research Implementations</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Project 1: Software Testing (Final-Year Major Project) -->
+      <div class="glass-panel rounded-3xl p-7 flex flex-col justify-between group border border-fuchsia-500/20 hover:border-fuchsia-400/50">
+        <div>
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-fuchsia-500/20 text-fuchsia-400 font-bold border border-fuchsia-500/30">FINAL YEAR MAJOR PROJECT</span>
+            <span class="text-amber-400 font-bold flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Active Build
+            </span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-fuchsia-300 transition">
+            Software Testing Platform
+          </h3>
+
+          <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
+            Final-year B.Tech Computer Science major project focused on building an automated software testing and validation platform. Designed to automate test case generation, streamline unit and integration test execution, and detect runtime edge-case failures across software application workflows.
+          </p>
+
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-400 font-mono">
+            <li class="flex items-start gap-2">
+              <span class="text-fuchsia-400 mt-0.5">&bull;</span>
+              <span>Automated test suite orchestration and execution pipelines</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-fuchsia-400 mt-0.5">&bull;</span>
+              <span>Edge-case discovery & bug telemetry diagnostics</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-fuchsia-400 mt-0.5">&bull;</span>
+              <span>Python, test frameworks, and automated validation scripts</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
+          <span class="text-zinc-500">Python &bull; Testing &bull; Automation</span>
+          <span class="text-fuchsia-400 font-bold">In Development 🚀</span>
+        </div>
+      </div>
+
+      <!-- Project 2: Redrob Hackathon Candidate Ranker -->
+      <div class="glass-panel rounded-3xl p-7 flex flex-col justify-between group hover:border-sky-400/50">
+        <div>
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-400 font-bold border border-sky-500/30">HACKATHON ML RANKER</span>
+            <span class="text-emerald-400 font-bold">100k Candidates</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-sky-300 transition">
+            Redrob Candidate Discovery & Ranker
+          </h3>
+
+          <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
+            Built an applied ML ranking system in Python for the "India Runs" Hackathon. Processed and evaluated a 100,000-candidate pool against a Founding Senior AI Engineer job description. Designed custom detection logic to flag keyword-stuffer and honeypot profiles, filtering out low-signal candidates and surfacing production-ready ML talent.
+          </p>
+
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-400 font-mono">
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-0.5">&bull;</span>
+              <span>Scored 100,000+ candidates against complex job criteria</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-0.5">&bull;</span>
+              <span>Anti-honeypot & anti-keyword stuffing anomaly filters</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-0.5">&bull;</span>
+              <span>Cosine distance vector matching & ranking heuristics</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
+          <span class="text-zinc-500">Python &bull; ML Ranking &bull; NLP</span>
+          <a href="https://github.com/rahulannaldas0406/redrob-hackathon-ranker" target="_blank" class="text-sky-400 font-bold hover:underline flex items-center gap-1">
+            GitHub Repo <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 3: Feedback Control Mechanism for OSN -->
+      <div class="glass-panel rounded-3xl p-7 flex flex-col justify-between group hover:border-indigo-400/50">
+        <div>
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-400 font-bold border border-indigo-500/30">RESEARCH PROJECT</span>
+            <span class="text-indigo-300 font-bold">Control Systems</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-indigo-300 transition">
+            Feedback Control for OSN Information Spread
+          </h3>
+
+          <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
+            Designed a closed-loop feedback control mechanism to regulate information diffusion patterns across online social networks (OSN). Leveraged network propagation equations and control theory to dynamically optimize dissemination patterns and minimize misinformation spread.
+          </p>
+
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-400 font-mono">
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 mt-0.5">&bull;</span>
+              <span>Simulated large-scale social network cascade dynamics</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 mt-0.5">&bull;</span>
+              <span>Dynamically throttled misinformation propagation nodes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 mt-0.5">&bull;</span>
+              <span>Graph centrality metrics & feedback containment loops</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
+          <span class="text-zinc-500">Control Theory &bull; Python &bull; Graphs</span>
+          <a href="https://github.com/rahulannaldas0406/feedback_control_project" target="_blank" class="text-indigo-400 font-bold hover:underline flex items-center gap-1">
+            GitHub Repo <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: LEETCODE (250+ SOLVED) & CODING PLATFORMS -->
+  <section id="coding" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/[0.08]">
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <span class="text-xs font-mono font-bold uppercase tracking-widest text-amber-400">Algorithmic Problem Solving</span>
+      <h3 class="text-3xl font-black tracking-tight text-white mt-2">Competitive Programming & Logic</h3>
+      <p class="text-xs text-zinc-400 mt-2 font-mono">
+        Over <strong class="text-amber-400">250+ LeetCode problems solved</strong> demonstrating consistent algorithmic thinking, optimization, and edge-case handling.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- LeetCode Card -->
+      <a href="https://leetcode.com/u/rahul_annaldas1/" target="_blank" class="glass-panel rounded-3xl p-8 space-y-4 group block hover:border-amber-400/50">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+          <i data-lucide="code-2" class="w-6 h-6"></i>
+        </div>
+        <div class="flex items-center justify-between">
+          <h4 class="text-xl font-bold text-white group-hover:text-amber-300 transition">LeetCode</h4>
+          <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30 font-bold">250+ Solved</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed font-mono">
+          Handle: @rahul_annaldas1<br>
+          Consistent daily practice in arrays, trees, dynamic programming, binary search, sliding window, and graph algorithms.
+        </p>
+        <div class="pt-2 text-xs font-mono text-amber-400 font-semibold flex items-center gap-1">
+          View LeetCode Profile <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- CodeChef Card -->
+      <a href="https://www.codechef.com/users/rahulannaldas" target="_blank" class="glass-panel rounded-3xl p-8 space-y-4 group block hover:border-orange-400/50">
+        <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+          <i data-lucide="terminal" class="w-6 h-6"></i>
+        </div>
+        <div class="flex items-center justify-between">
+          <h4 class="text-xl font-bold text-white group-hover:text-orange-300 transition">CodeChef</h4>
+          <span class="text-xs font-mono text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-md border border-orange-500/30 font-bold">Contests</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed font-mono">
+          Handle: @rahulannaldas<br>
+          Participating in rated division contests, mathematical logic, string manipulation, and strict execution constraints.
+        </p>
+        <div class="pt-2 text-xs font-mono text-orange-400 font-semibold flex items-center gap-1">
+          View CodeChef Profile <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- Codeforces Card -->
+      <a href="https://codeforces.com/profile/rahul_annaldas1" target="_blank" class="glass-panel rounded-3xl p-8 space-y-4 group block hover:border-blue-400/50">
+        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+          <i data-lucide="cpu" class="w-6 h-6"></i>
+        </div>
+        <div class="flex items-center justify-between">
+          <h4 class="text-xl font-bold text-white group-hover:text-blue-300 transition">Codeforces</h4>
+          <span class="text-xs font-mono text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/30 font-bold">Competitive</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed font-mono">
+          Handle: @rahul_annaldas1<br>
+          Solving timed algorithmic challenges, constructive algorithms, and rigorous edge-case testing under strict time limits.
+        </p>
+        <div class="pt-2 text-xs font-mono text-blue-400 font-semibold flex items-center gap-1">
+          View Codeforces Profile <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- SECTION: EXPERIENCE & INDUSTRY ENGAGEMENTS (FROM RESUME) -->
+  <section id="experience" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/[0.08]">
+    <div class="max-w-xl mb-12">
+      <span class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400">Industry & Hackathons</span>
+      <h3 class="text-3xl font-black tracking-tight text-white mt-1">Practical Experience</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Experience 1: Zoho Developer Hackathon -->
+      <div class="glass-panel rounded-3xl p-7 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">HACKATHON DEVELOPER</span>
+          <span class="text-xs font-mono text-zinc-500">January 2026</span>
+        </div>
+        <h4 class="text-xl font-bold text-white">Zoho Developer Community Hackathon</h4>
+        <p class="text-xs text-zinc-300 leading-relaxed">
+          Built a Flask and Python application and integrated automated tools to support internal process workflows, streamlining operations and reducing manual intervention.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono text-zinc-400">
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Flask</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Python</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Automation</span>
+        </div>
+      </div>
+
+      <!-- Experience 2: Tata Elxsi TELIPORT Season 3 -->
+      <div class="glass-panel rounded-3xl p-7 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-bold">TEAM MEMBER (TEAM GENZ)</span>
+          <span class="text-xs font-mono text-zinc-500">January 2026</span>
+        </div>
+        <h4 class="text-xl font-bold text-white">Tata Elxsi TELIPORT Season 3</h4>
+        <p class="text-xs text-zinc-300 leading-relaxed">
+          Contributed to "AI-Driven Predictive Maintenance for Smart Vehicles", researching relevant sensor telemetry variables and conceptualizing system architecture for preemptively flagging mechanical failures.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono text-zinc-400">
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Predictive AI</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Edge Telemetry</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5">Systems</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: SKILLS, TRAINING & CERTIFICATIONS (ACCORDING TO RESUME) -->
+  <section class="py-20 px-6 max-w-6xl mx-auto border-t border-white/[0.08]">
+    <div class="max-w-xl mb-12">
+      <span class="text-xs font-mono font-bold uppercase tracking-widest text-fuchsia-400">Resume Verified</span>
+      <h3 class="text-3xl font-black tracking-tight text-white mt-1">Skills & Certifications</h3>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Languages & Frameworks -->
+      <div class="glass-panel rounded-3xl p-6 space-y-3">
+        <div class="text-xs font-mono uppercase text-sky-400 font-bold">Languages & Web</div>
+        <p class="text-xs text-zinc-400">Core programming and backend services</p>
+        <div class="flex flex-wrap gap-1.5 pt-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Python</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Flask</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">C++</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">SQL / MySQL</span>
+        </div>
+      </div>
+
+      <!-- Data & Analysis -->
+      <div class="glass-panel rounded-3xl p-6 space-y-3">
+        <div class="text-xs font-mono uppercase text-fuchsia-400 font-bold">Data & Analysis</div>
+        <p class="text-xs text-zinc-400">Data pipelines & numerical analysis</p>
+        <div class="flex flex-wrap gap-1.5 pt-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">NumPy</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Pandas</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Matplotlib</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">NoSQL</span>
+        </div>
+      </div>
+
+      <!-- Core Competencies & Tools -->
+      <div class="glass-panel rounded-3xl p-6 space-y-3">
+        <div class="text-xs font-mono uppercase text-emerald-400 font-bold">Core & Platforms</div>
+        <p class="text-xs text-zinc-400">Algorithmic foundations & tools</p>
+        <div class="flex flex-wrap gap-1.5 pt-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">DSA</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Data Pipelines</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Git / GitHub</span>
+          <span class="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-200">Linux</span>
+        </div>
+      </div>
+
+      <!-- Certifications & AI -->
+      <div class="glass-panel rounded-3xl p-6 space-y-3">
+        <div class="text-xs font-mono uppercase text-amber-400 font-bold">Certifications & AI</div>
+        <p class="text-xs text-zinc-400">Verified credentials & coursework</p>
+        <div class="space-y-2 pt-2 text-xs font-mono text-zinc-300">
+          <div>&bull; <strong class="text-white">Aviatrix ACE</strong> (Multi-Cloud Network Associate)</div>
+          <div>&bull; <strong class="text-white">VISWAM.AI</strong> Summer AI Training (Swecha & IIIT-H)</div>
+          <div>&bull; <strong class="text-white">Agentic AI</strong> & Prompt Engineering</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: COMPLETE "GET IN TOUCH" -->
+  <section id="contact" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/[0.08]">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      
+      <!-- Contact Details (Left: Span 5) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase tracking-widest text-sky-400">Direct Contact</span>
+          <h3 class="text-3xl font-black tracking-tight text-white mt-1">Get In Touch</h3>
+          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+            I'm actively seeking Software Engineering and Data/ML roles. Reach out directly via email, phone, or LinkedIn:
+          </p>
+        </div>
+
+        <div class="space-y-3 text-xs font-mono">
+          <a href="mailto:rahulannaldas2006@gmail.com" class="p-3.5 rounded-2xl glass-panel flex items-center gap-3.5 hover:border-sky-400/50 group transition">
+            <div class="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-zinc-500 uppercase">Email</div>
+              <div class="text-zinc-200">rahulannaldas2006@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+919347083394" class="p-3.5 rounded-2xl glass-panel flex items-center gap-3.5 hover:border-emerald-400/50 group transition">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-zinc-500 uppercase">Phone & WhatsApp</div>
+              <div class="text-zinc-200">+91 9347083394</div>
+            </div>
+          </a>
+
+          <div class="p-3.5 rounded-2xl glass-panel flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-zinc-500 uppercase">Location</div>
+              <div class="text-zinc-200">Hyderabad, Telangana, India</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <a href="https://github.com/rahulannaldas0406" target="_blank" class="px-4 py-2 rounded-xl bg-zinc-900 border border-white/10 hover:border-white/30 text-zinc-300 text-xs font-mono flex items-center gap-2 transition">
+            <i data-lucide="github" class="w-4 h-4"></i> GitHub
+          </a>
+          <a href="https://linkedin.com/in/annaldas-rahul" target="_blank" class="px-4 py-2 rounded-xl bg-zinc-900 border border-white/10 hover:border-white/30 text-zinc-300 text-xs font-mono flex items-center gap-2 transition">
+            <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+          </a>
+          <a href="https://leetcode.com/u/rahul_annaldas1/" target="_blank" class="px-4 py-2 rounded-xl bg-zinc-900 border border-white/10 hover:border-amber-400/30 text-amber-400 text-xs font-mono flex items-center gap-2 transition">
+            <i data-lucide="code-2" class="w-4 h-4"></i> LeetCode
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form (Right: Span 7) -->
+      <div class="lg:col-span-7 glass-panel rounded-3xl p-7">
+        <h4 class="text-lg font-bold text-white mb-1">Send a Direct Message</h4>
+        <p class="text-xs text-zinc-400 mb-5">Have an opportunity or question? Submit your inquiry:</p>
+
+        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-zinc-400 mb-1">Your Name</label>
+              <input type="text" id="contact-name" required placeholder="Recruiter / Engineer Name" 
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-600 text-xs focus:outline-none focus:border-sky-500 transition">
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-zinc-400 mb-1">Your Email</label>
+              <input type="email" id="contact-email" required placeholder="name@company.com" 
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-600 text-xs focus:outline-none focus:border-sky-500 transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-zinc-400 mb-1">Subject</label>
+            <input type="text" id="contact-subject" required placeholder="Internship / Full-Time SDE Opportunity" 
+                   class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-600 text-xs focus:outline-none focus:border-sky-500 transition">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-zinc-400 mb-1">Message</label>
+            <textarea id="contact-message" rows="3" required placeholder="Write your message or inquiry here..." 
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-600 text-xs focus:outline-none focus:border-sky-500 transition"></textarea>
+          </div>
+
+          <button type="submit" 
+                  class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-fuchsia-600 text-white font-bold text-xs uppercase tracking-wider hover:opacity-95 transition flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)]">
+            <i data-lucide="send" class="w-4 h-4"></i> Dispatch Message
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 text-center border-t border-white/[0.08] space-y-3 bg-black">
+    <div class="text-zinc-500 text-xs font-mono">
+      &copy; 2026 ANNALDAS RAHUL &bull; ST. MARTIN'S ENGINEERING COLLEGE, HYDERABAD
+    </div>
+    <div class="flex justify-center gap-6 text-xs text-zinc-400 font-mono">
+      <a href="https://github.com/rahulannaldas0406" target="_blank" class="hover:text-white transition">GitHub</a>
+      <a href="https://linkedin.com/in/annaldas-rahul" target="_blank" class="hover:text-white transition">LinkedIn</a>
+      <a href="https://leetcode.com/u/rahul_annaldas1/" target="_blank" class="hover:text-amber-400 transition">LeetCode (250+)</a>
+      <a href="mailto:rahulannaldas2006@gmail.com" class="hover:text-white transition">Email</a>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK-CALL FAB -->
+  <a href="tel:+919347083394" 
+     class="fixed bottom-8 right-8 z-50 w-13 h-13 p-3.5 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-[0_0_25px_rgba(56,189,248,0.5)] hover:scale-110 active:scale-95 transition-transform"
+     title="Quick Call Rahul (+91 9347083394)">
+    <i data-lucide="phone-call" class="w-6 h-6"></i>
+  </a>
+
+  <!-- SCRIPTS -->
+  <script>
+    lucide.createIcons();
+
+    // Mouse Ambient Lighting Follower
+    const glow = document.getElementById('ambient-glow');
+    window.addEventListener('mousemove', (e) => {
+      glow.style.left = `${e.clientX}px`;
+      glow.style.top = `${e.clientY}px`;
+    });
+
+    // Contact Form Handler
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value;
+      window.location.href = `mailto:rahulannaldas2006@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
+    }
+  </script>
+</body>
+</html>
